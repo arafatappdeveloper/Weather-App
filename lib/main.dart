@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:weather_app/screen/weather_screen.dart';
+import 'package:weather_app/viewmodels/currenweatherscreen.dart';
+
+import 'View/bottom_navigation_bar.dart';
+
+
 
 void main() {
   runApp(const MyApp());
@@ -39,7 +43,7 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
           ),
-          home: WeatherScreen(),
+          home: BottomNBavigationbar(),
         );
       },
     );
