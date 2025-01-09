@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:weather_app/Services/api_services.dart';
 import 'package:weather_app/Widget/todayweather_widget.dart';
 import 'package:weather_app/utils/model_text_two.dart';
+import 'package:weather_app/viewmodels/seven_days_weather.dart';
 import 'package:weather_app/viewmodels/sports_screen.dart';
 
 import '../utils/date_time.dart';
@@ -77,8 +78,7 @@ class _CurrenweatherscreenState extends State<Currenweatherscreen> {
                                   SearchWeather();
                                 }
                               },
-                                child: Expanded(
-                                    child: Icon(Icons.search,color: Colors.white,size: 30,)))
+                                child: Icon(Icons.search,color: Colors.white,size: 30,))
                           ],
                         ),
                         ModelTextTwo(text: currentweather!['location']['name'], size: 35.sp),
@@ -98,41 +98,45 @@ class _CurrenweatherscreenState extends State<Currenweatherscreen> {
                   ),
                   child: Row(
                     children: [
-                      Expanded(
-                        child: Column(
-          
-                          children: [
-                            Image.network("http:${currentweather!['forecast']['forecastday'][0]['day']['condition']['icon']}",),
-                            ModelTextTwo(text:"Humidity :${ currentweather!['current']['humidity']?.toString()}%"??"Absent Now", size: 15.sp),
-          
-                          ],
-                        ),
+                      Column(
+                        children: [
+                          Image.network("http:${currentweather!['forecast']['forecastday'][0]['day']['condition']['icon']}",),
+                          ModelTextTwo(text:"Humidity :${ currentweather!['current']['humidity']?.toString()}%"??"Absent Now", size: 15.sp),
+
+                        ],
                       ), // SizedBox(width: width/6,),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            ModelTextTwo(text:"Wind S : ${ currentweather!['current']['wind_kph']?.toString()} km/h"??"Absent Now", size: 15.sp),
-                            ModelTextTwo(text: "Ccloud : ${currentweather!['current']['cloud']?.toString()}%" ?? "Absent now", size: 15.sp),
-                          ],
-                        ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ModelTextTwo(text:"Wind S : ${ currentweather!['current']['wind_kph']?.toString()} km/h"??"Absent Now", size: 15.sp),
+                          ModelTextTwo(text: "Ccloud : ${currentweather!['current']['cloud']?.toString()}%" ?? "Absent now", size: 15.sp),
+                        ],
                       ),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            ModelTextTwo(text:"Wind Dir : ${ currentweather!['current']['wind_dir']?.toString()} "??"Absent Now", size: 15.sp),
-                            ModelTextTwo(text: "Tem : ${currentweather!['current']['temp_f']?.toString()} F" ?? "Absent now", size: 15.sp),
-                          ],
-                        ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ModelTextTwo(text:"Wind Dir : ${ currentweather!['current']['wind_dir']?.toString()} "??"Absent Now", size: 15.sp),
+                          ModelTextTwo(text: "Tem : ${currentweather!['current']['temp_f']?.toString()} F" ?? "Absent now", size: 15.sp),
+                        ],
                       ),
                     ],
                   ),
                 ),
                 SizedBox(height: height/20),
-                ModelTextTwo(text: 'Todays Forecast Weather', size: 20.sp),
+                Row(
+                  children: [
+                    Expanded(child: ModelTextTwo(text: 'Todays Forecast Weather', size: 20.sp)),
+                    InkWell(
+                      onTap: (){
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context)=>SevenDaysWeather(city: city)),
+                        );
+                      },
+                        child: ModelTextTwo(text: 'See More', size: 15.sp))
+                  ],
+                ),
                 SizedBox(height: height/40),
                 Container(
                   height: height/5,
@@ -152,7 +156,9 @@ class _CurrenweatherscreenState extends State<Currenweatherscreen> {
                     },
 
                   ),
-                )
+                ),
+
+                
               ],
             ),
           ),

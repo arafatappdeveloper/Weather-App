@@ -43,8 +43,8 @@ Future<Map<String,dynamic>> SportsNews(String city)async{
 }
 
 //7days weather
-Future<Map<String,dynamic>>SevendaysWeather(String city)async{
-  final url = "$forecastbaseUrl?key=$apiKey&q=$city&days=7&aqi=no&alerts=no";
+Future<Map<String,dynamic>>SevendaysWeather(String query)async{
+  final url = "$forecastbaseUrl?key=$apiKey&q=$query&days=7&aqi=no&alerts=no";
   final response = await http.get(Uri.parse(url));
   if(response.statusCode==200){
     return json.decode(response.body);

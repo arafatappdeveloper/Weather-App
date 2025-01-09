@@ -14,7 +14,7 @@ class BottomNBavigationbar extends StatefulWidget {
 class _BottomNBavigationbarState extends State<BottomNBavigationbar> {
   int _selectedIndex=1;
   static const List<Widget>_widgetlist=[
-    SevenDaysWeather(),
+
     Currenweatherscreen(),
     SportsScreen()
   ];
@@ -35,10 +35,7 @@ class _BottomNBavigationbarState extends State<BottomNBavigationbar> {
              onTap: _ontapped,
              selectedItemColor: Colors.amber[800],
              items: [
-               BottomNavigationBarItem(
-                 icon: Icon(Icons.work_history),
-                 label: 'History',
-               ),
+
                BottomNavigationBarItem(
                  icon: Icon(Icons.cloud_circle),
                  label: 'Weather',

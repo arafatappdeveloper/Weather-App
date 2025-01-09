@@ -38,63 +38,192 @@ class _SportsScreenState extends State<SportsScreen> {
   Widget build(BuildContext context) {
     final double height= MediaQuery.of(context).size.height;
     final double width= MediaQuery.of(context).size.width;
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Colors.blue,
-        title: ModelTextTwo(text: 'Football', size: 22.sp)
+    return DefaultTabController(
+      length: 3,
+      child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title:Text( 'Match Shedule',style: TextStyle(fontSize: 18.sp),),
+          bottom: TabBar(
+              tabs: [
+                Text('FootBall'),
+                Text('Cricket'),
+                Text('Golf'),
+              ]),
+        ),
+           body: TabBarView(
+               children: [
+                 Padding(
+                     padding: EdgeInsets.all(2.r),
+                     child: sportData==null?Center(
+                       child: CircularProgressIndicator(),):
+                         sportData!['football']!=null?
+                         Padding(padding:  EdgeInsets.only(left: 10.w, right: 10.w,top: 10.h),
+                         child:ListView.builder(
+                             itemCount: sportData!['football'].length,
+                             itemBuilder: (context,index){
+                               final sport=sportData!['football'][index];
+                               return Card(
+                                 color: Colors.blue,
+                                 child: Column(
+                                   children: [
+                                     ModelTextTwo(text: sport['match'], size: 20.sp),
+                                     ModelTextTwo(text:  formatedatetime(sport['start']), size: 16.sp),
+                                     SizedBox(
+                                       height: 10.h,
+                                     ),
+                                     Row(
+                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                       children: [
+                                         Padding(
+                                           padding:  EdgeInsets.only(left: 6.w),
+                                           child: Container(
+                                               height:height/23 ,
+                                               decoration: BoxDecoration(
+                                                   color: Colors.white,
+                                                   borderRadius: BorderRadius.circular(10.r)
+                                               ),
+                                               child: Center(
+                                                   child: Padding(
+                                                     padding:  EdgeInsets.all(8.0.r),
+                                                     child: Text('${sport['stadium']}'),
+                                                   ))),
+                                         ),
+                                         Padding(
+                                           padding:  EdgeInsets.only(right: 6.w),
+                                           child: ModelTextTwo(text: sport['tournament'], size: 14.sp),
+                                         ),
+
+                                       ],
+                                     ),
+                                     SizedBox(
+                                       height: 10.h,
+                                     ),
+
+                                   ],
+                                 ),
+                               );
+                             }
+                         )
+                     ) :Center(
+                             child: Text('No Data Available',
+                                 style: TextStyle(color: Colors.blue))),
+                 ),
+                Padding(
+                  padding: EdgeInsets.all(2.r),
+                  child: sportData==null?Center(child: CircularProgressIndicator(),):
+                  sportData!.containsKey('cricket') &&
+                      sportData!['cricket'] != null &&
+                      sportData!['cricket'].isNotEmpty? Padding(padding:  EdgeInsets.only(left: 10.w, right: 10.w,top: 10.h),
+                      child:ListView.builder(
+                          itemCount: sportData!['cricket'].length,
+                          itemBuilder: (context,index){
+                            final sport=sportData!['cricket'][index];
+                            return Card(
+                              color: Colors.blue,
+                              child: Column(
+                                children: [
+                                  ModelTextTwo(text: sport['match'], size: 20.sp),
+                                  ModelTextTwo(text:  formatedatetime(sport['start']), size: 16.sp),
+                                  SizedBox(
+                                    height: 10.h,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Padding(
+                                        padding:  EdgeInsets.only(left: 6.w),
+                                        child: Container(
+                                            height:height/23 ,
+                                            decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius: BorderRadius.circular(10.r)
+                                            ),
+                                            child: Center(
+                                                child: Padding(
+                                                  padding:  EdgeInsets.all(8.0.r),
+                                                  child: Text('${sport['stadium']}'),
+                                                ))),
+                                      ),
+                                      Padding(
+                                        padding:  EdgeInsets.only(right: 6.w),
+                                        child: ModelTextTwo(text: sport['tournament'], size: 14.sp),
+                                      ),
+
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 10.h,
+                                  ),
+
+                                ],
+                              ),
+                            );
+                          }
+                      )
+                  ):Center(
+                      child: Text('Update Now.....',style: TextStyle(color: Colors.blue),)),
+                ),
+                 Padding(
+                   padding: EdgeInsets.all(2.r),
+                   child: sportData==null?Center(child: CircularProgressIndicator(),):
+                   sportData!.containsKey('golf') &&
+                       sportData!['golf'] != null &&
+                       sportData!['golf'].isNotEmpty? Padding(padding:  EdgeInsets.only(left: 10.w, right: 10.w,top: 10.h),
+                       child:ListView.builder(
+                           itemCount: sportData!['golf'].length,
+                           itemBuilder: (context,index){
+                             final sport=sportData!['golf'][index];
+                             return Card(
+                               color: Colors.blue,
+                               child: Column(
+                                 children: [
+                                   ModelTextTwo(text: sport['match'], size: 20.sp),
+                                   ModelTextTwo(text:  formatedatetime(sport['start']), size: 16.sp),
+                                   SizedBox(
+                                     height: 10.h,
+                                   ),
+                                   Row(
+                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                     children: [
+                                       Padding(
+                                         padding:  EdgeInsets.only(left: 6.w),
+                                         child: Container(
+                                             height:height/23 ,
+                                             decoration: BoxDecoration(
+                                                 color: Colors.white,
+                                                 borderRadius: BorderRadius.circular(10.r)
+                                             ),
+                                             child: Center(
+                                                 child: Padding(
+                                                   padding:  EdgeInsets.all(8.0.r),
+                                                   child: Text('${sport['stadium']}'),
+                                                 ))),
+                                       ),
+                                       Padding(
+                                         padding:  EdgeInsets.only(right: 6.w),
+                                         child: ModelTextTwo(text: sport['tournament'], size: 14.sp),
+                                       ),
+
+                                     ],
+                                   ),
+                                   SizedBox(
+                                     height: 10.h,
+                                   ),
+
+                                 ],
+                               ),
+                             );
+                           }
+                       )
+                   ):Center(
+                       child: Text('Update Now.....',style: TextStyle(color: Colors.blue),)),
+                 ),
+
+               ])
+      
+      
       ),
-      body: sportData==null? Center(child: CircularProgressIndicator(),):
-      Padding(
-        padding:  EdgeInsets.only(left: 10.w, right: 10.w,top: 10.h),
-        child:ListView.builder(
-          itemCount: sportData!['football'].length,
-            itemBuilder: (context,index){
-            final sport=sportData!['football'][index];
-            return Card(
-              color: Colors.blue,
-              child: Column(
-                children: [
-                  ModelTextTwo(text: sport['match'], size: 20.sp),
-                  ModelTextTwo(text:  formatedatetime(sport['start']), size: 16.sp),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Padding(
-                        padding:  EdgeInsets.only(left: 6.w),
-                        child: Container(
-                          height:height/23 ,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10.r)
-                            ),
-                            child: Center(
-                                child: Padding(
-                              padding:  EdgeInsets.all(8.0.r),
-                              child: Text('${sport['stadium']}'),
-                            ))),
-                      ),
-                      Padding(
-                        padding:  EdgeInsets.only(right: 6.w),
-                        child: ModelTextTwo(text: sport['tournament'], size: 14.sp),
-                      ),
-
-                    ],
-                  ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-
-                ],
-              ),
-            );
-            }
-        )
-      ),
-
     );
   }
 }
